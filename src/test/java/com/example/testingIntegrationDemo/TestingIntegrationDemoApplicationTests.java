@@ -32,7 +32,6 @@ public class TestingIntegrationDemoApplicationTests {
 	PersonDTO personDTO ;
 	
 	@Test
-	@Rollback
 	public void testPersonServiceSavePerson() {
 		personService.save(personDTO);
 		Person personResult = personService.getPersonById(new Long(1));
@@ -40,18 +39,11 @@ public class TestingIntegrationDemoApplicationTests {
 		Assert.assertEquals(personDTO.getLastname(), personResult.getLastname());
 		Assert.assertEquals(personDTO.getName(), personResult.getName());
 	}
-	
-	/*@Test
-    public void personControllerShouldReturnPersonDTO() throws Exception {
-		
-        //wgreetinghen(personServiceMock.save(personDTO)).thenReturn(Person);
-        this.mockMvc.perform(post("/savePerson")).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString("Martin")));
-    }
-*//*
-	@Sql ("/data.sql")	
+
+	@Sql ("/data.sql")
+	@Test
 	public void testPersonServiceFindById (){
 		Person person = personService.getPersonById(new Long(1));
 		Assert.assertEquals("Lopez", person.getLastname());
-	}*/
+	}
 }
