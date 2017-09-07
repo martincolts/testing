@@ -1,5 +1,7 @@
 package com.example.testingIntegrationDemo.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,9 @@ public class PersonService {
 	}
 	public Person getPersonById (Long id){
 		return personRepository.findById(id);
+	}
+	public List<Person> getAllPersons() {
+		return personRepository.findAll();
 	}
 
 }

@@ -11,5 +11,6 @@ public interface PersonRepository extends JpaRepository<Person, Serializable>{
 	public Person findById (Long id);
 	public List<Person> findByName (String name);
 	public List<Person> findByLastname (String lastname);
+	public Person getPersonById(Long id);
 
 }
