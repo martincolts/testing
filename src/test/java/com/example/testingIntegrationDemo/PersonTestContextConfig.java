@@ -10,8 +10,6 @@ import com.example.testingIntegrationDemo.Entities.Person;
 import com.example.testingIntegrationDemo.repositories.PersonRepository;
 
 @ComponentScan({"com.example.testingIntegrationDemo"})
-@EnableJpaRepositories(basePackageClasses = PersonRepository.class)
-@EntityScan(basePackageClasses = Person.class)
 public class PersonTestContextConfig {
 
 	@Bean

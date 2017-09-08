@@ -4,7 +4,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
@@ -23,6 +25,8 @@ import com.example.testingIntegrationDemo.services.PersonService;
 })
 //@WebMvcTest(PersonController.class)
 @SpringBootTest
+@EnableJpaRepositories(basePackageClasses = PersonRepository.class)
+@EntityScan(basePackageClasses = Person.class)
 public class TestingIntegrationDemoApplicationTests {
 
 	@Autowired
@@ -34,16 +38,16 @@ public class TestingIntegrationDemoApplicationTests {
 	@Test
 	public void testPersonServiceSavePerson() {
 		personService.save(personDTO);
-		Person personResult = personService.getPersonById(new Long(4));
-		Assert.assertEquals(new Long(4),	 personResult.getId());
+		Person personResult = personService.getPersonById(new Long(1));
+		Assert.assertEquals(new Long(1),	 personResult.getId());
 		Assert.assertEquals(personDTO.getLastname(), personResult.getLastname());
 		Assert.assertEquals(personDTO.getName(), personResult.getName());
 	}
 
-	@Sql ("/data.sql")
+	/*@Sql ("/data.sql")
 	@Test
 	public void testPersonServiceFindById (){
 		Person person = personService.getPersonById(new Long(1));
 		Assert.assertEquals("Lopez", person.getLastname());
-	}
+	}*/
 }

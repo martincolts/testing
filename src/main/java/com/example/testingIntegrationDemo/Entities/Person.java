@@ -2,7 +2,10 @@ package com.example.testingIntegrationDemo.Entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import com.example.testingIntegrationDemo.DTOs.PersonDTO;
 
@@ -10,7 +13,9 @@ import com.example.testingIntegrationDemo.DTOs.PersonDTO;
 public class Person {
 	
 	@Id
-	@GeneratedValue
+	@GenericGenerator(strategy= "identity",name="personseq")
+	@GeneratedValue(generator = "personseq")  
+	//@GenericGenerator(name = "autoincrement", strategy = "identity")  
 	private Long id ;
 	
 	private String name ;
