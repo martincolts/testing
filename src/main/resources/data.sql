@@ -1,4 +1,4 @@
-INSERT INTO Person (id , name , lastname ) VALUES
-	(1 , 'Martin', 'Lopez'),
-	(2 , 'Jose' , 'Perez'),
-	(3 , 'Juan' , 'Fulano');
+INSERT INTO Person (name , lastname ) VALUES
+	('Martin', 'Lopez'),
+	('Jose' , 'Perez'),
+	('Juan' , 'Fulano');

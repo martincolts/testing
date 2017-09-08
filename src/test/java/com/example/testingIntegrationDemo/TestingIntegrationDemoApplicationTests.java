@@ -16,13 +16,13 @@ import com.example.testingIntegrationDemo.repositories.PersonRepository;
 import com.example.testingIntegrationDemo.services.PersonService;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
 @ContextConfiguration (classes = {
 		PersonTestContextConfig.class ,
 		PersonService.class , 
 		PersonRepository.class
 })
 //@WebMvcTest(PersonController.class)
+@SpringBootTest
 public class TestingIntegrationDemoApplicationTests {
 
 	@Autowired
@@ -34,8 +34,8 @@ public class TestingIntegrationDemoApplicationTests {
 	@Test
 	public void testPersonServiceSavePerson() {
 		personService.save(personDTO);
-		Person personResult = personService.getPersonById(new Long(1));
-		Assert.assertEquals(new Long(1),	 personResult.getId());
+		Person personResult = personService.getPersonById(new Long(4));
+		Assert.assertEquals(new Long(4),	 personResult.getId());
 		Assert.assertEquals(personDTO.getLastname(), personResult.getLastname());
 		Assert.assertEquals(personDTO.getName(), personResult.getName());
 	}
