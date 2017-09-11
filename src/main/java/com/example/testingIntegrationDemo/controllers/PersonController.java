@@ -46,13 +46,12 @@ public class PersonController {
 	@RequestMapping(value = "/getPersonById/{id}", method = RequestMethod.GET)
 	public PersonDTO getPersonById(@PathVariable Long id) {
 		Person person = personService.getPersonById(id);
-		person = new Person ();
-		person.setLastname("Lopez");
-		person.setName("Martin");
 		PersonDTO personDTO = new PersonDTO();
-		personDTO.setId(person.getId());
-		personDTO.setName(person.getName());
-		personDTO.setLastname(person.getLastname());
+		if (person != null) {
+			personDTO.setId(person.getId());
+			personDTO.setName(person.getName());
+			personDTO.setLastname(person.getLastname());
+		}
 		return personDTO;
 	}
 }

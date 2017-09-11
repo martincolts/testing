@@ -11,6 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
@@ -32,6 +34,7 @@ import com.example.testingIntegrationDemo.services.PersonService;
 @WebMvcTest(PersonController.class)
 @WebAppConfiguration
 @ContextConfiguration(classes={PersonTestContextConfig.class})
+@AutoConfigureTestDatabase(replace=Replace.NONE)
 public class PersonControllerTest {
 	
 	private static EmbeddedDatabase db;
@@ -72,11 +75,12 @@ public class PersonControllerTest {
 	}
 	
 	@Test
-	@Sql({"drop-schema.sql","data-schema.sql","data.sql"})
+	@Sql({"/drop-schema.sql","/data-schema.sql","/data.sql"})
 	public void getPersonById() throws Exception {
-		this.mockMvc.perform(get("/demo/getPersonById/{id}","1")).andDo(print()).andExpect(status().isOk())
+		personService.save(personDTO);
+		this.mockMvc.perform(get("/demo/getPersonById/99")).andDo(print()).andExpect(status().isOk())
 				.andExpect(content().contentType("application/json;charset=UTF-8"))
-				.andExpect(jsonPath("$.name").value("Martin")).andExpect(jsonPath("$.id").value(new Long(1)));
+				.andExpect(jsonPath("$.name").value("Martin")).andExpect(jsonPath("$.id").value(new Long(99)));
 	}
 	
 	/*@After
