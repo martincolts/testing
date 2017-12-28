@@ -3,7 +3,6 @@ package com.example.testingIntegrationDemo.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.management.RuntimeErrorException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +16,7 @@ import com.example.testingIntegrationDemo.Entities.Person;
 import com.example.testingIntegrationDemo.services.PersonService;
 
 @RestController
-@RequestMapping(value = "/demo")
+@RequestMapping(value = "/demo", headers = "Accept=application/json")
 public class PersonController {
 
 	@Autowired
@@ -28,6 +27,8 @@ public class PersonController {
 		Person person = personService.save(personDTO);
 		return person.toPersonDTO();
 	}
+
+
 
 	@RequestMapping(value = "/getAllPersons", method = RequestMethod.GET)
 	public List<PersonDTO> getAllPersons() {
