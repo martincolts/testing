@@ -55,4 +55,29 @@ public class PersonController {
 		}
 		return personDTO;
 	}
+	
+	@RequestMapping (value="/updatePerson/{id}", method = RequestMethod.PUT)
+	public PersonDTO updatePerson(@PathVariable Long id , @RequestBody PersonDTO personDTOParam) {
+		personDTOParam.setId(id);
+		Person person = personService.updateById (personDTOParam);
+		PersonDTO personDTO = new PersonDTO();
+		if (person != null) {
+			personDTO.setId(person.getId());
+			personDTO.setName(person.getName());
+			personDTO.setLastname(person.getLastname());
+		}
+		return personDTO;
+	}
+	
+	@RequestMapping (value="/deletePerson/{id}", method = RequestMethod.DELETE)
+	public PersonDTO deletePerson (@PathVariable Long id) {
+		Person person = personService.delete(id);
+		PersonDTO personDTO = new PersonDTO();
+		if (person != null) {
+			personDTO.setId(person.getId());
+			personDTO.setName(person.getName());
+			personDTO.setLastname(person.getLastname());
+		}
+		return personDTO;
+	}
 }
