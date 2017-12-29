@@ -1,5 +1,6 @@
 package com.example.testingIntegrationDemo.services;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,12 @@ public class PersonService {
 		return personRepository.findById(id);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Person> getAllPersons() {
-		return personRepository.findAll();
+		List<Person> persons = personRepository.findAll();
+		Collections.sort(persons);
+		return persons ;
+		
 	}
 	
 	public Person updateById(PersonDTO personDTOParam) {

@@ -10,7 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 import com.example.testingIntegrationDemo.DTOs.PersonDTO;
 
 @Entity
-public class Person {
+public class Person implements Comparable{
 	
 	@Id
 	@GenericGenerator(strategy= "identity",name="personseq")
@@ -41,6 +41,18 @@ public class Person {
 		personDTO.setName(name);
 		personDTO.setId(id);
 		return personDTO;
+	}
+	
+	@Override
+	public int compareTo(Object o) {
+		Person p = (Person) o;
+		if (p.getId() < this.getId())
+			return 1 ;
+		else
+			if (p.getId() > this.getId())
+				return -1;
+			else
+				return 0 ;
 	}
 	
 
